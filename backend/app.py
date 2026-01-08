@@ -16,9 +16,7 @@ if not api_key:
     raise ValueError("Chave de API do Google não encontrada no arquivo .env")
 
 genai.configure(api_key=api_key)
-# Altere o modelo para o que você usou com sucesso
 model = genai.GenerativeModel('gemini-2.5-pro')
-
 app = Flask(__name__)
 CORS(app)
 
@@ -28,7 +26,6 @@ def get_database_content():
     cursor = conn.cursor()
     
     # Retorna apenas um resumo dos dados para evitar excesso de tokens
-    # Exemplo: total de chamados, primeiros 5 registros e colunas
     cursor.execute("SELECT COUNT(*) FROM chamados")
     total = cursor.fetchone()[0]
 
@@ -56,8 +53,6 @@ def chat():
     try:
         # Obter apenas um resumo dos dados do banco de dados
         db_content = get_database_content()
-
-        # Novo prompt orientando a IA a nunca tentar trazer todos os registros
         full_prompt = (
             "Você é um agente de análise de dados altamente qualificado. "
             "Nunca tente trazer todos os registros do banco de dados de uma só vez. "
@@ -98,37 +93,37 @@ def dashboard_analysis():
         # Prepara a lista de gráficos para retorno
         graphs = []
         
-        # 1. Distribuição de Chamados por Status (Colunas)
+        # Distribuição de Chamados por Status (Colunas)
         status_counts = df['status'].value_counts().reset_index()
         status_counts.columns = ['Status', 'Quantidade']
         fig_status = px.bar(status_counts, x='Status', y='Quantidade', title='Distribuição de Chamados por Status')
         graphs.append({"title": "Distribuição de Chamados por Status", "data": json.loads(fig_status.to_json())['data']})
 
-        # 2. Chamados por Canal de Abertura (Colunas)
+        # Chamados por Canal de Abertura (Colunas)
         canal_counts = df['tipo_abertura'].value_counts().reset_index()
         canal_counts.columns = ['Canal', 'Quantidade']
         fig_canal = px.bar(canal_counts, x='Canal', y='Quantidade', title='Chamados por Canal de Abertura')
         graphs.append({"title": "Chamados por Canal de Abertura", "data": json.loads(fig_canal.to_json())['data']})
         
-        # 3. Distribuição de Chamados por Tipo (Colunas)
+        # Distribuição de Chamados por Tipo (Colunas)
         tipo_counts = df['tipo_chamado'].value_counts().reset_index()
         tipo_counts.columns = ['Tipo', 'Quantidade']
         fig_tipo = px.bar(tipo_counts, x='Tipo', y='Quantidade', title='Distribuição de Chamados por Tipo')
         graphs.append({"title": "Distribuição de Chamados por Tipo", "data": json.loads(fig_tipo.to_json())['data']})
 
-        # 4. Distribuição de Chamados por Prioridade (Pizza)
+        # Distribuição de Chamados por Prioridade (Pizza)
         prioridade_counts = df['prioridade'].value_counts().reset_index()
         prioridade_counts.columns = ['Prioridade', 'Quantidade']
         fig_prioridade = px.pie(prioridade_counts, values='Quantidade', names='Prioridade', title='Distribuição de Chamados por Prioridade')
         graphs.append({"title": "Distribuição de Chamados por Prioridade", "data": json.loads(fig_prioridade.to_json())['data']})
 
-        # 5. Top 5 Analistas (Colunas)
+        # Top 5 Analistas (Colunas)
         analista_counts = df['analista'].value_counts().nlargest(5).reset_index()
         analista_counts.columns = ['Analista', 'Quantidade']
         fig_analista = px.bar(analista_counts, x='Analista', y='Quantidade', title='Top 5 Analistas com Mais Chamados Atribuídos')
         graphs.append({"title": "Top 5 Analistas com Mais Chamados Atribuídos", "data": json.loads(fig_analista.to_json())['data']})
 
-        # 6. Top 5 Categorias (Colunas)
+        # Top 5 Categorias (Colunas)
         categoria_counts = df['categoria'].value_counts().nlargest(5).reset_index()
         categoria_counts.columns = ['Categoria', 'Quantidade']
         fig_categoria = px.bar(categoria_counts, x='Categoria', y='Quantidade', title='Top 5 Categorias de Chamados')
