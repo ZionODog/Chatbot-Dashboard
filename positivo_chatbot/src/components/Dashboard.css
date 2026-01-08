@@ -1,0 +1,77 @@
+/* src/Dashboard.css */
+.dashboard-container {
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.dashboard-title {
+  text-align: center;
+  color: #fff;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard-summary {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #b3b3b3;
+}
+
+.cards-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: #1c1c2e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  text-align: center;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: #8884d8;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  color: #fff;
+}
+
+.charts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.chart-wrapper {
+  background-color: #1c1c2e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+.chart-wrapper h3 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: #ff6347;
+  text-align: center;
+}
