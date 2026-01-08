@@ -27,14 +27,14 @@ Ao contrário de sistemas que apenas leem planilhas, este bot atua como um **Eng
 _Interface de chat onde o usuário conversa diretamente com o banco de dados._
 
 <div align="center">
-  <img src="./assets/chatbot_view.jpg" alt="Interface do Chatbot de Análise" width="700">
+  <img src="./assets/chatbot.jpg" alt="Interface do Chatbot de Análise" width="700">
 </div>
 
 ### 📊 Dashboard Executivo
 _Visualização gráfica gerada a partir das queries automáticas._
 
 <div align="center">
-  <img src="./assets/dashboard_view.png" alt="Dashboard de Chamados" width="700">
+  <img src="./assets/dashboard.png" alt="Dashboard de Chamados" width="700">
 </div>
 
 ---
